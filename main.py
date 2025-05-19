@@ -6,10 +6,11 @@ import sys
 node_repos = [
     "BlockScience/koi-net-coordinator-node",
     "BlockScience/koi-net-debug-node",
-    "BlockScience/koi-net-hackmd-sensor-node"
+    "BlockScience/koi-net-hackmd-sensor-node",
+    "BlockScience/koi-net-slack-sensor-node"
 ]
 
-port_counter = 8000
+starting_port = 8000
 
 for node_repo in node_repos:
     owner, repo_name = node_repo.split("/", 1)
@@ -41,9 +42,9 @@ for node_repo in node_repos:
         print(f"Failed to find node module for repo {node_repo}")
         continue
     
-    subprocess.run([".venv\\Scripts\\activate.bat", "&&", "python", "..\\port_assigner.py", node_module, str(port_counter)], shell=True)
+    subprocess.run([".venv\\Scripts\\activate.bat", "&&", "python", "..\\port_assigner.py", node_module, str(starting_port)], shell=True)
     
-    port_counter += 1
+    starting_port += 1
     
     os.chdir("..")
     
